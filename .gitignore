@@ -1,0 +1,12 @@
+# 忽略 VulcanCoreClient 的 Debug 输出
+VulcanCoreClient/bin/Debug/
+VulcanCoreClient/obj/Debug/
+
+# 常规 C# 构建缓存
+*.user
+*.suo
+*.cache
+*.log
+.vs/
+bin/
+obj/
