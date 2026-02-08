@@ -1,8 +1,12 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
 using HarmonyLib;
+using Newtonsoft.Json;
 using Sdk;
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 using UnityEngine;
 
 namespace 学生时代个人插件
@@ -10,6 +14,7 @@ namespace 学生时代个人插件
     [BepInPlugin("studentage.hiddenhiragi.customplugins", "学生时代个人插件", "1.0.0")]
     public class MySAPlugin : BaseUnityPlugin
     {
+        public static string modPath = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         public void Awake()
         {
             var harmony = new Harmony("studentage.hiddenhiragi.customplugins");
@@ -23,12 +28,31 @@ namespace 学生时代个人插件
             {
                 var instance = Singleton<RoleMgr>.Ins;
                 Console.WriteLine($"标签值为: {instance.GetRole()?.GetUnlockValue(9022, true)}");
+                ExportIdMap();
                 _debugKeyLastFrame = _debugKey.IsPressed();
             }
             if (!_debugKey.IsPressed())
             {
                 _debugKeyLastFrame = false;
             }
+
+        }
+        public void ExportIdMap()
+        {
+            var dict = new Dictionary<int, string>();
+            for(var i = 0; i< 300000; i++)
+            {
+                var text = DescCtrl.GetFromTag(i);
+                if (text != null)
+                {
+                    dict.TryAdd(i, text);
+                }
+            }
+            Console.WriteLine($"{dict.Count}");
+            string json = JsonConvert.SerializeObject(dict, Formatting.Indented);
+            string pluginRootDir = Application.dataPath; // 在 Unity 中获取插件的根目录
+            string filePath = Path.Combine(modPath, "dict_data.json"); // 文件保存路径
+            File.WriteAllText(filePath, json);
 
         }
         public void InitConfigEntry()
@@ -183,6 +207,12 @@ namespace 学生时代个人插件
             false,
             "启用后社交容量无限"
             );
+            FightMiniGameInfinityHealth = Config.Bind(
+            "打架小游戏",
+            "锁定自身血量",
+            true,
+            "启用后打架小游戏自己挨打不掉血"
+            );
         }
 
         public KeyboardShortcut _debugKey = new KeyboardShortcut(KeyCode.F2);
@@ -209,5 +239,6 @@ namespace 学生时代个人插件
         public static ConfigEntry<bool> RevertMoneyCost { get; set; }
         public static ConfigEntry<bool> SkipAllMiniGame { get; set; }
         public static ConfigEntry<bool> InfinitySocialCapacity { get; set; }
+        public static ConfigEntry<bool> FightMiniGameInfinityHealth { get; set; }
     }
 }

@@ -43,6 +43,10 @@
       <HintPath>I:\SteamLibrary\steamapps\common\StudentAge\StudentAge_Data\Managed\Microsoft.CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>I:\SteamLibrary\steamapps\common\StudentAge\StudentAge_Data\Managed\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="UniTask">
       <HintPath>I:\SteamLibrary\steamapps\common\StudentAge\StudentAge_Data\Managed\UniTask.dll</HintPath>
       <Private>False</Private>
