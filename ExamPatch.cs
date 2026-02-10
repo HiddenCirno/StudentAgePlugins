@@ -114,6 +114,10 @@ namespace 学生时代个人插件
             {
                 examData.step = 0;
             }
+            if (MySAPlugin.InfinityStep.Value)
+            {
+                examData.step = 0;
+            }
             if (examData.step > 0 && restStepCntValue <= 0 && lastClickTypeValue != 9)
             {
                 return false;
@@ -295,6 +299,10 @@ namespace 学生时代个人插件
             var ShowDice = AccessTools.Method(typeof(Exam2MiniGameView), "ShowDice");
             Console.WriteLine($"当前格子类型: {examData.id}");
             if (examData.id == 6 && MySAPlugin.NoneBlockNoStep.Value || examData.id == 7 && MySAPlugin.AddBlockNoStep.Value)
+            {
+                examData.step = 0;
+            }
+            if (MySAPlugin.InfinityStep.Value)
             {
                 examData.step = 0;
             }

@@ -102,6 +102,12 @@ namespace 学生时代个人插件
             true,
             "杂念(红底禁止符号)格子不再消耗步数"
             );
+            InfinityStep = Config.Bind(
+            "考试小游戏",
+            "无限步数",
+            false,
+            "考试小游戏不消耗步数"
+            );
             SkillBlockMutiper = Config.Bind(
             "考试小游戏",
             "属性格子倍率",
@@ -213,6 +219,12 @@ namespace 学生时代个人插件
             true,
             "启用后打架小游戏自己挨打不掉血"
             );
+            AutoFishing = Config.Bind(
+            "钓鱼小游戏",
+            "自动钓鱼",
+            true,
+            "启用后自动增加钓鱼进度"
+            );
         }
 
         public KeyboardShortcut _debugKey = new KeyboardShortcut(KeyCode.F2);
@@ -225,6 +237,7 @@ namespace 学生时代个人插件
         public static ConfigEntry<bool> AddBlockNoStep { get; set; }
         public static ConfigEntry<int> AddBlockMutiper { get; set; }
         public static ConfigEntry<bool> NoneBlockNoStep { get; set; }
+        public static ConfigEntry<bool> InfinityStep { get; set; }
         public static ConfigEntry<bool> StaySocialCost { get; set; }
         public static ConfigEntry<bool> StayStudyCost { get; set; }
         public static ConfigEntry<bool> StayTeachCost { get; set; }
@@ -240,5 +253,6 @@ namespace 学生时代个人插件
         public static ConfigEntry<bool> SkipAllMiniGame { get; set; }
         public static ConfigEntry<bool> InfinitySocialCapacity { get; set; }
         public static ConfigEntry<bool> FightMiniGameInfinityHealth { get; set; }
+        public static ConfigEntry<bool> AutoFishing { get; set; }
     }
 }
